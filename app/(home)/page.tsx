@@ -5,6 +5,7 @@ import Header from "../_components/header";
 import Search from "./_components/search";
 import { db } from "../_lib/prisma";
 import BarbershopItem from "./_components/barbershop-item";
+import Footer from "../_components/footer";
 
 export default async function Home() {
   /* LLAMAR A PRISMA Y OBTENER BARBERIAS */
@@ -12,7 +13,7 @@ export default async function Home() {
 
   return (
     <div className="">
-      <Header></Header>
+      <Header />
 
       <div className="px-5 pt-5">
         <h2 className="text-xl font-bold">Olá, Enderson</h2>
@@ -34,15 +35,28 @@ export default async function Home() {
         <BookingItem />
       </div>
 
-      <div className="mt-6">
+      <div className="px-5 mt-6">
         <h2 className="text-xs mb-3 uppercase text-gray-400 font-bold">
           Recomendados
         </h2>
-        <div className="">
+        <div className="flex gap-4 overflow-x-auto [&::-webkit-scrollbar]:hidden">
           {barbershop.map((barbershop) => (
             <BarbershopItem key={barbershop.id} barbershop={barbershop} />
           ))}
         </div>
+      </div>
+      <div className="px-5 mt-6 mb-[4.5rem]">
+        <h2 className="text-xs mb-3 uppercase text-gray-400 font-bold">
+          Populares
+        </h2>
+        <div className="flex gap-4 overflow-x-auto [&::-webkit-scrollbar]:hidden">
+          {barbershop.map((barbershop) => (
+            <BarbershopItem key={barbershop.id} barbershop={barbershop} />
+          ))}
+        </div>
+      </div>
+      <div className="flex text-center">
+        <Footer />
       </div>
     </div>
   );
