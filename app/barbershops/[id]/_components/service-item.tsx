@@ -17,6 +17,7 @@ const ServiceItem = ({ service }: ServiceItem) => {
               className="rounded-lg"
               src={service.imageUrl}
               fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               style={{ objectFit: "contain" }}
               alt={service.name}
             />

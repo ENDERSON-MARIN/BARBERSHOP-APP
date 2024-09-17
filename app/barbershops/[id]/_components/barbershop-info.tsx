@@ -38,6 +38,7 @@ const BarbershopInfo = ({ barbershop }: BarbershopInfoProps) => {
         <Image
           src={barbershop.imageUrl}
           fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           alt={barbershop.name}
           style={{ objectFit: "cover" }}
           className="opacity-75"
