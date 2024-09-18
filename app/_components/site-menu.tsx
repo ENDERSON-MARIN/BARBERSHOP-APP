@@ -42,7 +42,7 @@ const SideMenu = () => {
         <div className="flex flex-col px-5 py-6">
           <div className="flex items-center gap-2 px-5 py-6">
             <UserIcon size={32} />
-            <h2 className="font-bold">Olá, faça seu Loign</h2>
+            <h2 className="font-bold">Olá, faça seu Login</h2>
           </div>
 
           <Button
