@@ -1,13 +1,44 @@
+"use client";
+
 import { Button } from "@/app/_components/ui/button";
 import { Card, CardContent } from "@/app/_components/ui/card";
 import { Service } from "@prisma/client";
+import { signIn } from "next-auth/react";
 import Image from "next/image";
+import Swal from "sweetalert2";
 
-interface ServiceItem {
+interface ServiceItemProps {
   service: Service;
+  isAuthenticated: boolean;
 }
 
-const ServiceItem = ({ service }: ServiceItem) => {
+const ServiceItem = ({ service, isAuthenticated }: ServiceItemProps) => {
+  const handleBookingClick = () => {
+    if (!isAuthenticated) {
+      /* Para no mostrar la ventana de login con google */
+      // return signIn("google");
+      Swal.fire({
+        title: "Para reservar deve estar logado na plataforma!",
+        text: "Será redirecionado para fazer login!",
+        icon: "warning",
+        showCancelButton: false,
+        confirmButtonColor: "Cool",
+        // confirmButtonColor: "#3085d6",
+        // cancelButtonColor: "#d33",
+        confirmButtonText: "Ok!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // Swal.fire({
+          //   title: "Deleted!",
+          //   text: "Your file has been deleted.",
+          //   icon: "success"
+          // });
+          return signIn();
+        }
+      });
+    }
+  };
+
   return (
     <Card>
       <CardContent className="p-3">
@@ -32,7 +63,9 @@ const ServiceItem = ({ service }: ServiceItem) => {
                   currency: "BRL",
                 }).format(Number(service.price))}
               </p>
-              <Button variant="secondary">Reservar</Button>
+              <Button variant="secondary" onClick={handleBookingClick}>
+                Reservar
+              </Button>
             </div>
           </div>
         </div>
