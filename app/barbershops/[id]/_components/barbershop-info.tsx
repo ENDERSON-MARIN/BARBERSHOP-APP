@@ -2,15 +2,10 @@
 
 import Image from "next/image";
 import { Button } from "@/app/_components/ui/button";
-import {
-  ChevronLeftIcon,
-  MapPinIcon,
-  MenuIcon,
-  StarIcon,
-} from "lucide-react";
+import { ChevronLeftIcon, MapPinIcon, MenuIcon, StarIcon } from "lucide-react";
 import { Barbershop } from "@prisma/client";
 import { useRouter } from "next/navigation";
-import {  Sheet, SheetContent, SheetTrigger  } from "@/app/_components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger } from "@/app/_components/ui/sheet";
 import SideMenu from "@/app/_components/site-menu";
 
 interface BarbershopInfoProps {
@@ -21,7 +16,7 @@ const BarbershopInfo = ({ barbershop }: BarbershopInfoProps) => {
   const router = useRouter();
 
   const handleBackClick = () => {
-    router.back();
+    router.replace("/");
   };
 
   return (
