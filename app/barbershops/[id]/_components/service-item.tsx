@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { Button } from "@/app/_components/ui/button";
@@ -13,12 +14,14 @@ import {
 } from "@/app/_components/ui/sheet";
 import { Barbershop, Service } from "@prisma/client";
 import { ptBR } from "date-fns/locale";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import Image from "next/image";
 import { useMemo, useState } from "react";
 import Swal from "sweetalert2";
 import { generateDayTimeList } from "../_helpers/hours";
-import { format } from "date-fns";
+import { format, setHours, setMinutes } from "date-fns";
+import { saveBooking } from "../_actions/save-booking";
+import { Loader2 } from "lucide-react";
 
 interface ServiceItemProps {
   barbershop: Barbershop;
@@ -31,8 +34,21 @@ const ServiceItem = ({
   barbershop,
   isAuthenticated,
 }: ServiceItemProps) => {
+  /* OBTENER SESSION DEL USUARIO LOGUEADO */
+  const { data } = useSession();
+
   const [date, setDate] = useState<Date | undefined>(undefined);
   const [hour, setHour] = useState<string | undefined>();
+  const [submitIsLoading, setSubmitIsLoading] = useState(false);
+
+  const handleDateClick = (date: Date | undefined) => {
+    setDate(date);
+    setHour(undefined);
+  };
+
+  const handleHourClick = (time: string) => {
+    setHour(time);
+  };
 
   const handleBookingClick = () => {
     if (!isAuthenticated) {
@@ -60,13 +76,40 @@ const ServiceItem = ({
     }
   };
 
-  const handleDateClick = (date: Date | undefined) => {
-    setDate(date);
-    setHour(undefined);
-  };
+  const handleBookingSubmit = async () => {
+    setSubmitIsLoading(true);
+    try {
+      if (!hour || !date || !data?.user) {
+        return;
+      }
 
-  const handleHourClick = (time: string) => {
-    setHour(time);
+      // hour: 09:45
+
+      const dateHour = Number(hour.split(":")[0]);
+      const dateminutes = Number(hour.split(":")[1]);
+
+      const newDate = setMinutes(setHours(date, dateHour), dateminutes);
+
+      await saveBooking({
+        serviceId: service.id,
+        barbershopId: barbershop.id,
+        date: newDate,
+        userId: (data.user as any).id,
+      });
+      Swal.fire({
+        title: "Perfeito!",
+        text: "Serviço agendado com sucesso!",
+        icon: "success",
+        timer: 1500,
+        showConfirmButton: false,
+        // confirmButtonColor: "Cool",
+        // confirmButtonText: "Ok!",
+      });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setSubmitIsLoading(false);
+    }
   };
 
   /* Mostrar el listado de turnos de las barberias de 9 a las 21 con intervalos de 45 min */
@@ -199,7 +242,13 @@ const ServiceItem = ({
                       </Card>
                     </div>
                     <SheetFooter className="px-5">
-                      <Button disabled={!hour || !date}>
+                      <Button
+                        disabled={!hour || !date || submitIsLoading}
+                        onClick={handleBookingSubmit}
+                      >
+                        {submitIsLoading && (
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        )}
                         Confirmar Reserva
                       </Button>
                     </SheetFooter>
