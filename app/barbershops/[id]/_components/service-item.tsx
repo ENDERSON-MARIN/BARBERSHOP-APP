@@ -25,6 +25,7 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import BookingInfo from "@/app/_components/booking-info";
 import { getDayBookings } from "../_actions/get-day-bookings";
+import Swal from "sweetalert2";
 
 interface ServiceItemProps {
   barbershop: Barbershop;
@@ -71,7 +72,31 @@ const ServiceItem = ({
 
   const handleBookingClick = () => {
     if (!isAuthenticated) {
-      return signIn("google");
+      Swal.fire({
+        title: "Para reservar deve estar logado na plataforma!",
+        text: "Presione OK para fazer login!",
+        icon: "warning",
+        // timer: 3000,
+        showCancelButton: false,
+        showConfirmButton: true,
+        confirmButtonColor: "Cool",
+        confirmButtonText: "Ok!",
+        // confirmButtonColor: "#3085d6",
+        // cancelButtonColor: "#d33",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // Swal.fire({
+          //   title: "Deleted!",
+          //   text: "Your file has been deleted.",
+          //   icon: "success"
+          // });
+          /* Para no mostrar la ventana de login con google */
+          // return signIn("google");
+          return signIn();
+        }
+      });
+    } else {
+      setSheetIsOpen(true);
     }
   };
 
@@ -147,8 +172,10 @@ const ServiceItem = ({
               className="rounded-lg"
               src={service.imageUrl}
               fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               style={{ objectFit: "contain" }}
               alt={service.name}
+              priority
             />
           </div>
 
@@ -163,12 +190,11 @@ const ServiceItem = ({
                   currency: "BRL",
                 }).format(Number(service.price))}
               </p>
+              <Button variant="secondary" onClick={handleBookingClick}>
+                Reservar
+              </Button>
               <Sheet open={sheetIsOpen} onOpenChange={setSheetIsOpen}>
-                <SheetTrigger asChild>
-                  <Button variant="secondary" onClick={handleBookingClick}>
-                    Reservar
-                  </Button>
-                </SheetTrigger>
+                <SheetTrigger asChild></SheetTrigger>
 
                 <SheetContent className="p-0">
                   <SheetHeader className="text-left px-5 py-6 border-b border-solid border-secondary">
