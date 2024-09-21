@@ -1,15 +1,15 @@
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
-import BookingItem from "../_components/bokking-item";
+import BookingItem from "../_components/booking-item";
 import Header from "../_components/header";
 import Search from "./_components/search";
 import { db } from "../_lib/prisma";
 import BarbershopItem from "./_components/barbershop-item";
-import Footer from "../_components/footer";
 
 export default async function Home() {
   /* LLAMAR A PRISMA Y OBTENER BARBERIAS */
   const barbershop = await db.barbershop.findMany({});
+  
 
   return (
     <div className="">
@@ -28,12 +28,12 @@ export default async function Home() {
         <Search />
       </div>
 
-      <div className="px-5 mt-6">
+      {/* <div className="px-5 mt-6">
         <h2 className="text-xs mb-3 uppercase text-gray-400 font-bold">
           Agendamientos
         </h2>
-        <BookingItem />
-      </div>
+        <BookingItem booking={booking} />
+      </div> */}
 
       <div className="px-5 mt-6">
         <h2 className="text-xs mb-3 uppercase text-gray-400 font-bold">
@@ -54,9 +54,6 @@ export default async function Home() {
             <BarbershopItem key={barbershop.id} barbershop={barbershop} />
           ))}
         </div>
-      </div>
-      <div className="flex text-center">
-        <Footer />
       </div>
     </div>
   );
