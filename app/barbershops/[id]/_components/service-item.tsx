@@ -18,7 +18,8 @@ import { signIn, useSession } from "next-auth/react";
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
 import { generateDayTimeList } from "../_helpers/hours";
-import { addDays, format, setHours, setMinutes } from "date-fns";
+// import { addDays, format, setHours, setMinutes } from "date-fns";
+import { format, setHours, setMinutes } from "date-fns";
 import { saveBooking } from "../_actions/save-booking";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
@@ -207,7 +208,10 @@ const ServiceItem = ({
                       selected={date}
                       onSelect={handleDateClick}
                       locale={ptBR}
-                      fromDate={addDays(new Date(), 1)}
+                      /* solo permite reservar a partir del dia siguiente al actual en horario de 9am a 9pm*/
+                      // fromDate={addDays(new Date(), 1)}
+                      /* permite reservar a partir el dia actual en horario de 9am a 9pm  */
+                      fromDate={new Date()}
                       styles={{
                         head_cell: {
                           width: "100%",
