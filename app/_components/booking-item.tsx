@@ -22,6 +22,8 @@ import { cancelBooking } from "../_actions/cancel-booking";
 import { toast } from "sonner";
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
+import Swal from "sweetalert2";
+import { useRouter } from "next/navigation";
 
 interface BookingItemProps {
   booking: Prisma.BookingGetPayload<{
@@ -34,19 +36,37 @@ interface BookingItemProps {
 
 const BookingItem = ({ booking }: BookingItemProps) => {
   const [isDeleteLoading, setIsDeleteLoading] = useState(false);
+  const [sheetIsOpen, setSheetIsOpen] = useState(false);
 
   const isBookingConfirmed = isFuture(booking.date);
 
+  const router = useRouter();
+
   const handleCancelClick = async () => {
     setIsDeleteLoading(true);
+    setSheetIsOpen(false);
     try {
-      await cancelBooking(booking.id);
-      toast("Reserva cancelada com sucesso!", {
-        // duration: 5000, // Mantiene el toast abierto 5 segundos
-        action: {
-          label: "Ok",
-          onClick: () => toast.dismiss(),
-        },
+      Swal.fire({
+        title: "Deseja cancelar esta reserva?",
+        text: "O processo é irreversível!",
+        icon: "question",
+        // timer: 3000,
+        showConfirmButton: true,
+        confirmButtonColor: "Cool",
+        confirmButtonText: "Sim",
+        showCancelButton: true,
+        cancelButtonColor: "#d33",
+        cancelButtonText: "Não",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          await cancelBooking(booking.id);
+          Swal.fire({
+            title: "Cancelada!",
+            text: "Reserva cancelada com sucesso!",
+            icon: "success",
+          });
+          router.push("/bookings");
+        }
       });
     } catch (error) {
       console.log(error);
@@ -56,7 +76,7 @@ const BookingItem = ({ booking }: BookingItemProps) => {
   };
 
   return (
-    <Sheet>
+    <Sheet open={sheetIsOpen} onOpenChange={setSheetIsOpen}>
       <SheetTrigger asChild>
         <Card className="min-w-full">
           <CardContent className="px-0 flex py-0">
