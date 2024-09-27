@@ -265,7 +265,7 @@ const ServiceItem = ({
                                 Number(hour.split(":")[1])
                               )
                             : undefined,
-                        service: service,
+                        service: service, 
                       }}
                     />
                   </div>
