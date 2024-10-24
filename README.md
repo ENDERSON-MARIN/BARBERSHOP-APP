@@ -5,6 +5,7 @@ BARBERSHOP APP
 # Project Description
 
 Appointment scheduling application for barbershops with the following features:
+
 - Allows users to log in (google authentication).
 - Search for barbershops by name.
 - Allows users to reserve appointments for services offered by the barbershop, date and time must be selected.
@@ -13,6 +14,7 @@ Appointment scheduling application for barbershops with the following features:
 - Shows the list of recommended and popular barbershops.
 
 Technologies and tools used in the project:
+
 - Typescript
 - Nextjs
 - PostgreSQL
@@ -26,27 +28,34 @@ Technologies and tools used in the project:
 - Git - Github
 - Vs code
 
-# Screenshots
+## Screenshots
 
-<img src="./public/screenshots/home.png" alt="Home" width="300" height="auto" />
-<img src="./public/screenshots/search.png" alt="Search" width="300" height="auto" />
-<img src="./public/screenshots/barber_details.png" alt="Barber Details" width="300" height="auto" />
-<img src="./public/screenshots/fazer_reserva.png" alt="Fazer Reserva" width="300" height="auto" />
-<img src="./public/screenshots/confirmed_reserva.png" alt="Confirmed Reserva" width="300" height="auto" />
-<img src="./public/screenshots/agendamientos.png" alt="Agendamientos" width="300" height="auto" />
-<img src="./public/screenshots/agendamiento_details.png" alt="Agendamiento Details" width="300" height="auto" />
-<img src="./public/screenshots/agendamiento_cancelar.png" alt="Agendamiento Cancelar" width="300" height="auto" />
-<img src="./public/screenshots/agendamiento_finalizado.png" alt="Agendamiento Finalizado" width="300" height="auto" />
-<img src="./public/screenshots/login_menu.png" alt="Login Menu" width="300" height="auto" />
-<img src="./public/screenshots/login_google.png" alt="Login Google" width="300" height="auto" />
-<img src="./public/screenshots/logout.png" alt="Logout" width="300" height="auto" />
+<table>
+  <tr>
+    <td><img src="./public/screenshots/home.png" alt="Home" width="300" height="auto" /></td>
+    <td><img src="./public/screenshots/search.png" alt="Search" width="300" height="auto" /></td>
+    <td><img src="./public/screenshots/barber_details.png" alt="Barber Details" width="300" height="auto" /></td>
+    <td><img src="./public/screenshots/fazer_reserva.png" alt="Fazer Reserva" width="300" height="auto" /></td>
+  </tr>
+  <tr>
+    <td><img src="./public/screenshots/confirmed_reserva.png" alt="Confirmed Reserva" width="300" height="auto" /></td>
+    <td><img src="./public/screenshots/agendamientos.png" alt="Agendamientos" width="300" height="auto" /></td>
+    <td><img src="./public/screenshots/agendamiento_details.png" alt="Agendamiento Details" width="300" height="auto" /></td>
+    <td><img src="./public/screenshots/agendamiento_cancelar.png" alt="Agendamiento Cancelar" width="300" height="auto" /></td>
+  </tr>
+  <tr>
+    <td><img src="./public/screenshots/agendamiento_finalizado.png" alt="Agendamiento Finalizado" width="300" height="auto" /></td>
+    <td><img src="./public/screenshots/login_menu.png" alt="Login Menu" width="300" height="auto" /></td>
+    <td><img src="./public/screenshots/login_google.png" alt="Login Google" width="300" height="auto" /></td>
+    <td><img src="./public/screenshots/logout.png" alt="Logout" width="300" height="auto" /></td>
+  </tr>
+</table>
 
 ## Videos Demo
 
 - You can watch a demonstration of my projects in the following chanel:
 
-    https://www.youtube.com/channel/UCDIIj706aFneZlfVJucVkhA
-
+  https://www.youtube.com/channel/UCDIIj706aFneZlfVJucVkhA
 
 ## Getting Started
 
@@ -64,8 +73,8 @@ git clone https://github.com/ENDERSON-MARIN/BARBERSHOP-APP.git
 
 # Change directory and open in the text editor
 
--   cd your-project-directory
--   open in your text editor
+- cd your-project-directory
+- open in your text editor
 
 # Configure your environment variables (Clone the .env.template file and rename it to .env)
 
@@ -78,31 +87,38 @@ git clone https://github.com/ENDERSON-MARIN/BARBERSHOP-APP.git
 # Very simply start your app
 
 - Run the DB migrations
+
 ```
 npx prisma migrate dev
 ```
+
 - Run the seed (test data)
+
 ```
 npx prisma db seed
 ```
+
 - Run Prisma Studio locally
+
 ```
 npx prisma studio
 ```
+
 - Start the project in development mode
+
 ```
 npm run dev
 ```
+
 - You can check website will be up and running on localhost
-http://localhost:3000
+  http://localhost:3000
 
 - You can check db will be up and running on localhost
-http://localhost:5555
-
+  http://localhost:5555
 
 ## Author
 
--   [Enderson Marín](https://www.marinenderson.com)
+- [Enderson Marín](https://www.marinenderson.com)
 
 ## My contact:
 
@@ -111,9 +127,6 @@ http://localhost:5555
 - 🌐 Portfolio: https://portfolio-ecmm.vercel.app/
 - 💼 LinkedIn: https://www.linkedin.com/in/enderson-marin
 
-
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-
