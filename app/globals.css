@@ -44,3 +44,12 @@
     @apply bg-background text-foreground antialiased h-full flex flex-col;
   }
 }
+
+/* fixed footer */
+  
+footer {
+  background-color: #f1f1f1;
+  text-align: center;
+  padding: 10px 0;
+}
+

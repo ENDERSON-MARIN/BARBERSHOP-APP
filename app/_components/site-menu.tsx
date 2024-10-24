@@ -17,7 +17,7 @@ const SideMenu = () => {
   const { data } = useSession();
 
   const handleLogoutClick = () => signOut();
-  const handleLoginClick = () => signIn("google");
+  const handleLoginClick = () => signIn();
   return (
     <div className="">
       <SheetHeader className="text-left border-b border-secondary p-5">
