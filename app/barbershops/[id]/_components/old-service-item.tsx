@@ -75,7 +75,7 @@ const ServiceItem = ({
           //   text: "Your file has been deleted.",
           //   icon: "success"
           // });
-          return signIn();
+          return signIn("google");
         }
       });
     }

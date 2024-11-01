@@ -92,8 +92,8 @@ const ServiceItem = ({
           //   icon: "success"
           // });
           /* Para no mostrar la ventana de login con google */
-          // return signIn("google");
-          return signIn();
+          // return signIn();
+          return signIn("google");
         }
       });
     } else {
